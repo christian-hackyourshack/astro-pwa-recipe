@@ -10,16 +10,22 @@
     "build": "astro build",
     "check": "astro check",
     "dev": "astro dev",
+    "generate-pwa-assets": "pwa-assets-generator --preset minimal public/favicon.svg",
     "preview": "astro preview"
   },
   "dependencies": {
     "@astrojs/mdx": "^2.0.0",
     "@astrojs/node": "^7.0.0",
+    "@astrojs/vercel": "^6.0.0",
     "@picocss/pico": "2.0.0-alpha1",
     "astro": "^4.0.2"
   },
   "devDependencies": {
     "@astrojs/check": "^0.3.1",
-    "typescript": "^5.3.2"
+    "@vite-pwa/assets-generator": "^0.0.11",
+    "@vite-pwa/astro": "^0.2.0",
+    "typescript": "^5.3.2",
+    "vite-plugin-pwa": "^0.17.3",
+    "workbox-window": "^7.0.0"
   }
 }

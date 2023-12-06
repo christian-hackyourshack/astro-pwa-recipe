@@ -2,6 +2,7 @@
 import "@picocss/pico";
 import packageJson from "../../package.json";
 import Nav from "../components/Nav.astro";
+import { pwaInfo } from "virtual:pwa-info";
 
 interface Props {
   title?: string;
@@ -24,6 +25,19 @@ if (!title || title === packageJson.title) {
     <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
     <meta name="generator" content={Astro.generator} />
     <title>{title}</title>
+    {pwaInfo && <Fragment set:html={pwaInfo.webManifest.linkTag} />}
+    <script>
+      import { registerSW } from "virtual:pwa-register";
+      registerSW({
+        immediate: true,
+        onRegisteredSW(swScriptUrl) {
+          console.log("SW registered: ", swScriptUrl);
+        },
+        onOfflineReady() {
+          console.log("PWA application ready to work offline");
+        },
+      });
+    </script>
   </head>
   <body>
     <Nav />
