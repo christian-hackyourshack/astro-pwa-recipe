@@ -1,0 +1,19 @@
+{
+  "name": "astro-pwa-recipe",
+  "type": "module",
+  "version": "0.0.1",
+  "scripts": {
+    "astro": "astro",
+    "build": "astro build",
+    "check": "astro check",
+    "dev": "astro dev",
+    "preview": "astro preview"
+  },
+  "dependencies": {
+    "astro": "^4.0.2"
+  },
+  "devDependencies": {
+    "@astrojs/check": "^0.3.1",
+    "typescript": "^5.3.2"
+  }
+}
