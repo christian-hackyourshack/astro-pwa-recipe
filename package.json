@@ -1,5 +1,8 @@
 {
   "name": "astro-pwa-recipe",
+  "title": "Astro PWA Recipe",
+  "description": "A PWA recipe for Astro",
+  "author": "Christian the Shack Hacker",
   "type": "module",
   "version": "0.0.1",
   "scripts": {
@@ -10,6 +13,9 @@
     "preview": "astro preview"
   },
   "dependencies": {
+    "@astrojs/mdx": "^2.0.0",
+    "@astrojs/node": "^7.0.0",
+    "@picocss/pico": "2.0.0-alpha1",
     "astro": "^4.0.2"
   },
   "devDependencies": {

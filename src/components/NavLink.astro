@@ -1,0 +1,29 @@
+---
+import type { HTMLAttributes } from "astro/types";
+
+type Props = Omit<HTMLAttributes<"a">, "href"> & {
+  href: string;
+};
+
+const { href, class: className, ...props } = Astro.props;
+let { pathname } = Astro.url;
+// Remove trailing slash
+pathname = pathname.replace(/\/$/, "") || "/";
+
+const isActive = pathname === href || (href !== "/" && pathname.startsWith(href));
+---
+
+<a href={href} class:list={[className, { active: isActive }]} {...props}>
+  <slot />
+</a>
+
+<style>
+  a {
+    display: inline-block;
+    text-decoration: none;
+  }
+  a.active {
+    font-weight: bolder;
+    text-decoration: underline;
+  }
+</style>

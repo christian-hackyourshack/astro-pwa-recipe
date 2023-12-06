@@ -1,0 +1,22 @@
+---
+import Layout from "../../layouts/Layout.astro";
+import { localeDate } from "../../utils/locale-date";
+const posts = await Astro.glob("./*.mdx");
+---
+
+<Layout>
+  <h1>Journal</h1>
+  <p>My learning journey creating a Progressive Web App with Astro...</p>
+
+  <ul>
+    {
+      posts.map((post) => (
+        <li>
+          <a href={post.url}>
+            {localeDate(post.frontmatter.date)}: {post.frontmatter.summary}
+          </a>
+        </li>
+      ))
+    }
+  </ul>
+</Layout>

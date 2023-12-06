@@ -1,0 +1,15 @@
+---
+import Layout from "./Layout.astro";
+import { localeDate } from "../utils/locale-date";
+
+const {
+  frontmatter: { date },
+} = Astro.props;
+---
+
+<Layout title={`Journal ${localeDate(date)}`}>
+  <h1>Journal</h1>
+  <p><a href="/journal">&lt; Back</a></p>
+  <h2>{localeDate(date)}</h2>
+  <slot />
+</Layout>

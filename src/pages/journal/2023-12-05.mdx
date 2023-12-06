@@ -1,0 +1,97 @@
+---
+layout: ../../layouts/JournalLayout.astro
+date: 2023-12-05
+summary: A first try
+---
+
+### The basic app [09:15]
+
+I am setting up an initial site on Vercel, that I want to turn into a PWA step-by-step. For now it is a plain MDX based blog with two blog entries, one for this journal, and one for the [recipe](/blog/recipe).
+
+I am using Astro 4.0.0-beta.4 with the corresponding MDX and RSS plugins as well as the Vercel adapter to start off.
+
+The whole site is very easily styled with PicoCSS (v2.0.0-alpha) to feel app-like. In order to omit potential problems between the service worker and the client-side router, we start without `ViewTransitions`.
+
+You can [find the code on Github](https://github.com/christian-hackyourshack/astro-pwa-recipe) and follow the [Discord Thread](https://discord.com/channels/830184174198718474/1180923219100835971) for discussions.
+
+### Adding Vite-PWA [13:20]
+
+First step will be, to setup and test the most basic setup with autoUpdate, and making it installable with the browser's tools.
+
+I try to follow the [Vite-PWA documentation for the Astro integration](https://vite-pwa-org.netlify.app/frameworks/astro.html), comparing it to [the official simple example](https://github.com/vite-pwa/astro/tree/main/examples/pwa-simple).
+
+#### Installation
+
+When comparing, I wonder why the docs say to install Vite-PWA as dev dependency, while the example uses it as runtime dependency and also uses workbox-window explicitly as runtime dependency. I could imagine, that (for SSR), workbox-window is required at runtime and Vite-PWA at build time, hence I would install them seperately, but this should be mentioned in the docs.
+
+> **My use of NPM Installation levels:** Since NPM only offers two levels for modules to be installed when running `pnpm install` (devDependencies and dependencies), I use them differently depending on the kind of project:
+>
+> - SSG: I distinguish local `devDependencies` and (CI/CD) build time ` dependencies`. Because we do not really have a runtime (as everything is just static at runtime), this separation gives me an extra handle to improve build speed.
+> - SSR: I summarize local development and CI/CD build time into `devDependencies` and runtime `dependencies`, as I want to have control, what runs on the public facing server.
+
+Let's try it out: I will first just follow the docs and install Vite-PWA ass devDependency...
+
+```bash
+pnpm add -D @vite-pwa/astro
+```
+
+#### Virtual modules not found
+
+The virtual modules are not found by Typescript/Astro I tried to include them in tsconfig.json and add triple-slash references in env.d.ts, but both even combined do not make Astro pickup the types.
+
+Installing vite-plugin-pwa explicitly helps with Typescript files, but not with Astro files, though.
+
+#### Building the PWA
+
+After configuration, when running `pnpm build`, I get an error. It seems `workbox-window` is required as explicit dependency.
+
+```log
+11:58:15 [ERROR] [vite] [vite-plugin-pwa:build] [vite]: Rollup failed to resolve import "workbox-window" from "/@vite-plugin-pwa/virtual:pwa-register".
+This is most likely unintended because it can break your application at runtime.
+If you do want to externalize this module explicitly add it to
+`build.rollupOptions.external`
+```
+
+To fix this I install it as an explicit dependency, although it is probably fine to have only as a devDependency. I will try later.
+
+```bash
+pnpm add -D workbox-window
+```
+
+Now `pnpm build` works without errors.
+
+### Running on dev server
+
+Now, let's try it on the development server first, although I expect it to behave different from the deployed version, we might get some insights
+
+```bash
+pnpm dev
+```
+
+#### Webmanifest
+
+When I check the PWA in development with Chrome devtools in the Application tab, it does not find the webmanifest, which was somehow expected, but reading the docs for pwa-info it should be there.
+
+```
+Return the PWA information if available.
+
+This property will be undefined if:
+
+SSR build
+PWA is disabled: pwaPluginOptions.disable = true
+running Dev Server and pwaPluginOptions.devOptions.enabled = false (default).
+```
+
+I am running on DevServer and have devOptions.enabled: true and the docs say also, that webmanifest on DevServer is supported since v 0.12.2+ (I am running 0.17.6).
+
+#### Service Worker
+
+The service worker is there, but its interceptions always return the homepage, independent of the route. In development, this does not seem to work correctly.
+
+I tried out with the node adapter and preview: That seems to work.
+
+### Running on Vercel
+
+## 🙏 Thank You
+
+To the always incredible Astro Discord community, in this case particularly [Joaquín Sánchez](https://github.com/userquin).

@@ -1,0 +1,53 @@
+---
+import HeaderLink from "./NavLink.astro";
+import AstroPWA from "./icons/AstroPWA.astro";
+import Github from "./icons/Github.astro";
+import Mastodon from "./icons/Mastodon.astro";
+---
+
+<nav class="container-fluid">
+  <div>
+    <a href="/"><AstroPWA size="64" /></a>
+  </div>
+  <div class="internal-links">
+    <HeaderLink href="/recipe">Recipe</HeaderLink>
+    <HeaderLink href="/journal">Journal</HeaderLink>
+  </div>
+  <div class="social-links">
+    <a href="https://mastodon.online/@no_fuss" target="_blank">
+      <span class="sr-only">Follow Christian on Mastodon</span>
+      <Mastodon />
+    </a>
+    <a href="https://github.com/christian-hackyourshack/astro-pwa-recipe" target="_blank">
+      <span class="sr-only">GitHub repo for Astro PWA recipe</span>
+      <Github />
+    </a>
+  </div>
+</nav>
+
+<style>
+  nav {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+  }
+  nav a {
+    padding: 1em 0.5em;
+    color: var(--black);
+    border-bottom: 4px solid transparent;
+    text-decoration: none;
+  }
+  nav a.active {
+    text-decoration: none;
+    border-bottom-color: var(--accent);
+  }
+  .social-links,
+  .social-links a {
+    display: flex;
+  }
+  @media (max-width: 720px) {
+    .social-links {
+      display: none;
+    }
+  }
+</style>
