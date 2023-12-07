@@ -4,15 +4,17 @@
     "dockerfile": "Dockerfile",
     "args": {
       // Override default versions from Dockerfile
-      // "ALPINE_VERSION": "3.18",
+      // "ALPINE_VERSION": "3.19",
       "NODE_VERSION": "20",
-      "NPM_PACKAGES": "pnpm@latest"
+      "NPM_PACKAGES": "typescript @types/node tsx pnpm@latest"
+      // For CLI scripts, you might want to also install:
+      // commander listr @types/listr
     }
   },
-  "mounts": [
-    "source=/var/run/docker.sock,target=/var/run/docker-host.sock,type=bind",
-    "source=/usr/bin/docker,target=/usr/bin/docker,type=bind"
-  ],
+  // "mounts": [
+  //   "source=/var/run/docker.sock,target=/var/run/docker-host.sock,type=bind",
+  //   "source=/usr/bin/docker,target=/usr/bin/docker,type=bind"
+  // ],
   "containerEnv": {
     "LAUNCH_EDITOR": "code"
   },
@@ -35,7 +37,7 @@
         "jock.svg",
         "johnreemar.vscode-qwik-snippets",
         "unifiedjs.vscode-mdx",
-        "yzhang.markdown-all-in-one"
+        "yzhang.markdown-all-in-one"ing
       ]
     }
   },
