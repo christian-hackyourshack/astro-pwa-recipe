@@ -1,8 +1,9 @@
 import mdx from "@astrojs/mdx";
-import node from "@astrojs/node";
+// import node from "@astrojs/node";
 import vercel from "@astrojs/vercel/serverless";
 import AstroPWA from "@vite-pwa/astro";
 import { defineConfig } from "astro/config";
+import type { ManifestOptions } from "vite-plugin-pwa";
 import manifest from "./webmanifest.json";
 
 // https://astro.build/config
@@ -17,17 +18,13 @@ export default defineConfig({
   integrations: [
     mdx(),
     AstroPWA({
+      manifest: manifest as Partial<ManifestOptions>,
       mode: "production",
       registerType: "autoUpdate",
       includeAssets: ["favicon.svg"],
       workbox: {
-        navigateFallback: "/",
         globPatterns: ["**/*.{css,js,html,svg,png,ico,txt}"],
       },
-      experimental: {
-        directoryAndTrailingSlashHandler: true,
-      },
-      manifest,
     }),
   ],
 });

@@ -24,6 +24,8 @@ Install the Vite-PWA Astro integration as development dependency
 pnpm add -D @vite-pwa/astro workbox-window
 ```
 
+> ❓ For the rollup build, we also explicitly need to install `workbox-window` (this might be a pnpm thing, where the internal dependencies of vite-plugin-pwa are not configured correctly).
+
 ### Generate assets (optional)
 
 If you have all required PNG and ICO assets for your branding, you can skip this step.
@@ -36,7 +38,7 @@ Install the asset generator
 pnpm add -D @vite-pwa/assets-generator
 ```
 
-Add the following to the `scripts` of `package.json`
+Add the following line to the `scripts` section of `package.json`
 
 ```json
     "generate-pwa-assets": "pwa-assets-generator --preset minimal public/favicon.svg",
@@ -61,6 +63,8 @@ Create a JSON file `webmanifest.json` at the root of your project with the follo
   "name": "Astro PWA | The recipe",
   "short_name": "Astro PWA",
   "description": "Example PWA for Astro using Vite-PWA",
+  "orientation": "portrait",
+  "display": "standalone",
   "theme_color": "#ff5d01",
   "background_color": "#11191f",
   "icons": [
@@ -90,7 +94,7 @@ Create a JSON file `webmanifest.json` at the root of your project with the follo
 }
 ```
 
-These are custom settings, that will be injected into the generated webmanifest, others are configured in the integration. Adapt the settings, e.g. the colors, to your app.
+This is used as the basis for the generated webmanifest. Adapt the settings, e.g. the colors, to your app.
 
 ### Configure the Astro integration
 
@@ -99,6 +103,7 @@ Update `astro.config.mjs` to include the AstroPWA integration
 ```js
 import { defineConfig } from "astro/config";
 import AstroPWA from "@vite-pwa/astro";
+import type { ManifestOptions } from "vite-plugin-pwa";
 import manifest from "./webmanifest.json";
 
 // https://astro.build/config
@@ -115,19 +120,19 @@ export default defineConfig({
       experimental: {
         directoryAndTrailingSlashHandler: true,
       },
-      manifest,
+      manifest: manifest as Partial<ManifestOptions>,
     }),
   ],
 });
 ```
 
-This configures the PWA in production mode with automatic updates. The [underlying workbox is configured](https://vite-pwa-org.netlify.app/workbox/) for all generated file types.
+This is the most simple configuration for Vite-PWA for production mode with automatic updates. It includes the favicon.svg in the precached assets.
 
 ### Register the service worker
 
 Add a script to your base layout (or all layouts if you don't use a central layout), that registers the service worker on every page of the app.
 
-```ts
+```astro
   <script>
     import { registerSW } from "virtual:pwa-register";
 
@@ -143,18 +148,61 @@ Add a script to your base layout (or all layouts if you don't use a central layo
   </script>
 ```
 
-This uses a Vite-PWA virtual module. To make this available to Typescript you must expicitly install the basic Vite-PWA (at least for pnpm). That still does not work in Astro files, though.
-
-```
-pnpm add -D vite-plugin-pwa
-```
-
-and add the triple-slash type references to `src/env.d.ts`
+This uses a Vite-PWA virtual module. To make this available to Typescript you must add two triple-slash type references to `src/env.d.ts`
 
 ```ts
 /// <reference types="vite-plugin-pwa/info" />
 /// <reference types="vite-plugin-pwa/vanillajs" />
 ```
+
+> ❓ At least for pnpm, you must exlicitly install `vite-plugin-pwa` to resolve the type references.
+>
+> ```bash
+> pnpm add -D vite-plugin-pwa
+> ```
+>
+> You might need to restart your IDE for Astro Language Support to pick this up.
+
+### Link the webmanifest
+
+In the same layout, above the `<script>` tag, link the webmanifest. Use the virtual module `pwa-info` to generate the correct link.
+
+```astro
+---
+import { pwaInfo } from "virtual:pwa-info";
+---
+  <head>
+  ...
+    {pwaInfo && <Fragment set:html={pwaInfo.webManifest.linkTag} />}
+    <script>
+    ...
+```
+
+This finishes the setup of a basic installable PWA without using any of the specific PWA features. You can now deploy it and install it to your home screen, either by "Add to home screen..." or "Install app...", depending on your browser.
+
+### Offline support (pre-caching and caching)
+
+To include all resource types of your app, you must configure the workbox `globPatterns`, because by default, they include only html, css and js.
+
+Add the following to the AstroPWA configuration
+
+```ts
+      workbox: {
+        globPatterns: ["**/*.{js,css,html,ico,png,svg}"],
+      },
+```
+
+This now also includes graphic assets from your app, add more as you need.
+
+For an SSR app, the assets are picked up from the `dist/client` directory.
+
+## Upcoming Features
+
+### Custom 404 page
+
+### Push notifications
+
+### Development mode
 
 ## Community Resources
 

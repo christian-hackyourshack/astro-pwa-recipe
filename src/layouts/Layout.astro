@@ -6,6 +6,7 @@ import { pwaInfo } from "virtual:pwa-info";
 
 interface Props {
   title?: string;
+  description?: string;
 }
 
 let { title } = Astro.props;
@@ -14,17 +15,22 @@ if (!title || title === packageJson.title) {
 } else {
   title = `${title} | ${packageJson.title}`;
 }
+const { description = packageJson.description } = Astro.props;
 ---
 
 <!doctype html>
 <html lang="en">
   <head>
     <meta charset="UTF-8" />
-    <meta name="description" content="Astro description" />
-    <meta name="viewport" content="width=device-width" />
-    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
-    <meta name="generator" content={Astro.generator} />
     <title>{title}</title>
+    <meta name="description" content={description} />
+    <meta name="generator" content={Astro.generator} />
+    <meta name="viewport" content="width=device-width" />
+    <meta name="theme-color" content="#ff5d01" />
+    <meta name="msapplication-TileColor" content="#FF5D01" />
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <link rel="mask-icon" href="/favicon.svg" color="#FFFFFF" />
+    <link rel="apple-touch-icon" href="/pwa-192x192.png" />
     {pwaInfo && <Fragment set:html={pwaInfo.webManifest.linkTag} />}
     <script>
       import { registerSW } from "virtual:pwa-register";
