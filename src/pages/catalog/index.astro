@@ -1,0 +1,33 @@
+---
+import Layout from "@/layouts/Layout.astro";
+import { cuisines } from "cuisines.json";
+import { recipes } from "recipes.json";
+
+export const prerender = false;
+
+const randomId = Math.floor(Math.random() * recipes.length);
+---
+
+<Layout>
+  <h1>Recipes</h1>
+  <p>Our best recipe is still the one <a href="/recipe">how to cook a PWA</a>.</p>
+  <form>
+    <label for="search"
+      >Search
+      <input type="text" id="search" name="search" />
+      <button type="submit">Search</button>
+    </label>
+  </form>
+  <h2>Cook this Today</h2>
+  <a href={`/recipes/${randomId}`}>{recipes[randomId].name}</a>
+  <h2>Cuisines</h2>
+  <ul>
+    {
+      cuisines.map((cuisine) => (
+        <li>
+          <a href={`/cuisines/${cuisine.name.toLowerCase()}`}>{cuisine.name}</a>
+        </li>
+      ))
+    }
+  </ul>
+</Layout>

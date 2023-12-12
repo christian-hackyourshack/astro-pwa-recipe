@@ -1,0 +1,31 @@
+---
+import Layout from "@/layouts/Layout.astro";
+import { recipes } from "recipes.json";
+
+export const prerender = false;
+
+const id = Number(Astro.params.id || "0");
+const { name, cuisine, ingredients, preparation } = recipes[id];
+---
+
+<Layout>
+  <div>{cuisine}</div>
+  <h1>{name}</h1>
+  <h2>Ingredients</h2>
+  <ul>
+    {
+      ingredients.map((ingredient) => (
+        <li>{`${ingredient.amount} ${ingredient.unit} of ${ingredient.name}`}</li>
+      ))
+    }
+  </ul>
+  <h2>Preparation</h2>
+  {
+    preparation.map((step) => (
+      <>
+        <h3>{step.name}</h3>
+        <p>{step.description}</p>
+      </>
+    ))
+  }
+</Layout>

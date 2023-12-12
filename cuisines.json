@@ -1,0 +1,79 @@
+{
+  "cuisines": [
+    {
+      "name": "French",
+      "description": "French cuisine is known for its emphasis on fresh, high-quality ingredients and meticulous preparation. It often involves rich sauces, delicate pastries, and a wide variety of cheeses.",
+      "image": "https://www.willflyforfood.net/wp-content/uploads/2022/10/french-food-confit-de-canard.jpg.webp"
+    },
+    {
+      "name": "Italian",
+      "description": "Italian cuisine is characterized by its simplicity and reliance on high-quality, fresh ingredients. Pasta, olive oil, and tomatoes are staples, and regional variations abound.",
+      "image": "https://c.ndtvimg.com/2021-04/umk8i7ko_pasta_625x300_01_April_21.jpg?im=FaceCrop,algorithm=dnn,width=1200,height=886"
+    },
+    {
+      "name": "Japanese",
+      "description": "Japanese cuisine focuses on the art of presentation and emphasizes seasonal ingredients. Sushi, sashimi, and ramen are well-known Japanese dishes.",
+      "image": "https://imageproxy.wolt.com/venue/60a4dc1f450244536705cb22/f5e9d760-c472-11eb-855c-fe2dd7e6d16b_hachiko__close_up.jpg"
+    },
+    {
+      "name": "Mexican",
+      "description": "Mexican cuisine is known for its bold flavors, vibrant colors, and diverse ingredients. Tacos, enchiladas, and guacamole are popular Mexican dishes.",
+      "image": "https://images.immediate.co.uk/production/volatile/sites/30/2022/10/Pork-carnitas-b94893e.jpg?quality=90&resize=556,505"
+    },
+    {
+      "name": "Indian",
+      "description": "Indian cuisine is known for its use of aromatic spices and diverse flavors. Curries, biryanis, and tandoori dishes are common in Indian cooking.",
+      "image": "https://uploads-ssl.webflow.com/5fe0022130b6119c3b25d03f/6000a4262c3c62f6aadb85d3_shutterstock_1044844045.jpg"
+    },
+    {
+      "name": "Chinese",
+      "description": "Chinese cuisine is diverse, with regional variations in flavors and techniques. Dim sum, stir-fries, and Peking duck are classic Chinese dishes.",
+      "image": "https://media.timeout.com/images/106055284/750/562/image.jpg"
+    },
+    {
+      "name": "Thai",
+      "description": "Thai cuisine is known for its balance of sweet, sour, salty, and spicy flavors. Pad Thai, green curry, and Tom Yum soup are popular Thai dishes.",
+      "image": "https://ichef.bbci.co.uk/images/ic/688xn/p0g3gr7p.jpg"
+    },
+    {
+      "name": "Mediterranean",
+      "description": "Mediterranean cuisine emphasizes olive oil, fresh vegetables, and lean proteins. Greek salads, Italian antipasto, and Spanish paella are iconic dishes.",
+      "image": "https://static.toiimg.com/thumb/84895387.cms?width=680&height=512&imgsize=530422"
+    },
+    {
+      "name": "Brazilian",
+      "description": "Brazilian cuisine features a mix of European, African, and indigenous influences. Feijoada, churrasco, and coxinha are well-known Brazilian dishes.",
+      "image": "https://images.immediate.co.uk/production/volatile/sites/30/2020/08/barbecued-meats-24426a4.jpg?quality=90&fit=700,350"
+    },
+    {
+      "name": "Vietnamese",
+      "description": "Vietnamese cuisine is known for its fresh herbs, rice noodles, and balanced flavors. Pho, banh mi, and spring rolls are popular Vietnamese dishes.",
+      "image": "https://qul.imgix.net/548b537c-1053-47b0-88e4-7d98c0d3428a/443814_sld.jpg"
+    },
+    {
+      "name": "Korean",
+      "description": "Korean cuisine is characterized by bold flavors, including garlic, ginger, and chili peppers. Kimchi, bulgogi, and bibimbap are classic Korean dishes.",
+      "image": "https://static.toiimg.com/thumb/82085026.cms?resizemode=4&width=1200"
+    },
+    {
+      "name": "Spanish",
+      "description": "Spanish cuisine is diverse and varies by region. Tapas, paella, and chorizo are commonly associated with Spanish cooking.",
+      "image": "https://www.expatica.com/app/uploads/sites/2/2014/05/spanish-cuisine.jpg"
+    },
+    {
+      "name": "Moroccan",
+      "description": "Moroccan cuisine features a blend of flavors, including spices like cumin and coriander. Tagine, couscous, and pastilla are popular Moroccan dishes.",
+      "image": "https://res.cloudinary.com/ddjuftfy2/image/upload/f_webp/memphis/large/d7b2e9ec8e200ca0a2297c17fc281f10.jpg"
+    },
+    {
+      "name": "Peruvian",
+      "description": "Peruvian cuisine is known for its fusion of flavors from indigenous, Spanish, African, and Asian influences. Ceviche, lomo saltado, and aji de gallina are typical Peruvian dishes.",
+      "image": "https://blog.amigofoods.com/wp-content/uploads/2019/05/best-peruvian-foods.jpg"
+    },
+    {
+      "name": "Turkish",
+      "description": "Turkish cuisine is a mix of Central Asian, Middle Eastern, and Balkan flavors. Kebabs, baklava, and mezes are well-loved Turkish dishes.",
+      "image": "https://taximcafe.com/wp-content/uploads/2019/06/Blog3-Banner.jpg"
+    }
+  ]
+}

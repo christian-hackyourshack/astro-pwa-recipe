@@ -1,0 +1,244 @@
+{
+  "recipes": [
+    {
+      "name": "Ratatouille",
+      "cuisine": "French",
+      "ingredients": [
+        { "name": "Eggplant", "amount": 1, "unit": "large, diced" },
+        { "name": "Zucchini", "amount": 2, "unit": "medium, sliced" },
+        { "name": "Bell pepper", "amount": 1, "unit": "red, diced" },
+        { "name": "Tomatoes", "amount": 4, "unit": "medium, chopped" },
+        { "name": "Onion", "amount": 1, "unit": "large, diced" },
+        { "name": "Garlic", "amount": 3, "unit": "cloves, minced" },
+        { "name": "Fresh thyme", "amount": 1, "unit": "tablespoon" },
+        { "name": "Olive oil", "amount": 3, "unit": "tablespoons" },
+        { "name": "Salt", "amount": 1, "unit": "teaspoon" },
+        { "name": "Black pepper", "amount": 1, "unit": "teaspoon" }
+      ],
+      "preparation": [
+        { "name": "Preheat oven", "description": "Preheat the oven to 375°F (190°C)." },
+        {
+          "name": "Prepare vegetables",
+          "description": "In a large baking dish, combine diced eggplant, sliced zucchini, diced bell pepper, chopped tomatoes, diced onion, and minced garlic."
+        },
+        {
+          "name": "Season and bake",
+          "description": "Drizzle olive oil over the vegetables, add fresh thyme, salt, and black pepper. Toss to coat evenly. Bake for 45-50 minutes, stirring occasionally, until vegetables are tender."
+        },
+        { "name": "Serve", "description": "Serve ratatouille as a side dish or over cooked pasta." }
+      ]
+    },
+    {
+      "name": "Coq au Vin",
+      "cuisine": "French",
+      "ingredients": [
+        { "name": "Chicken thighs", "amount": 6, "unit": "bone-in, skin-on" },
+        { "name": "Bacon", "amount": 150, "unit": "grams, diced" },
+        { "name": "Carrots", "amount": 4, "unit": "medium, sliced" },
+        { "name": "Onion", "amount": 1, "unit": "large, chopped" },
+        { "name": "Garlic", "amount": 4, "unit": "cloves, minced" },
+        { "name": "Red wine", "amount": 750, "unit": "milliliters" },
+        { "name": "Chicken broth", "amount": 250, "unit": "milliliters" },
+        { "name": "Tomato paste", "amount": 2, "unit": "tablespoons" },
+        { "name": "Flour", "amount": 3, "unit": "tablespoons" },
+        { "name": "Fresh thyme", "amount": 2, "unit": "sprigs" }
+      ],
+      "preparation": [
+        {
+          "name": "Brown chicken",
+          "description": "In a large pot, brown chicken thighs in bacon fat over medium-high heat. Remove and set aside."
+        },
+        {
+          "name": "Sauté vegetables",
+          "description": "In the same pot, sauté chopped onion, minced garlic, diced bacon, and sliced carrots until vegetables are tender."
+        },
+        {
+          "name": "Deglaze and simmer",
+          "description": "Deglaze the pot with red wine, scraping up any browned bits. Add chicken broth, tomato paste, and flour. Return chicken to the pot, add fresh thyme, and simmer for 1.5 to 2 hours."
+        },
+        {
+          "name": "Serve",
+          "description": "Serve Coq au Vin with crusty bread or over mashed potatoes."
+        }
+      ]
+    },
+    {
+      "name": "Croissant",
+      "cuisine": "French",
+      "ingredients": [
+        { "name": "All-purpose flour", "amount": 500, "unit": "grams" },
+        { "name": "Warm milk", "amount": 250, "unit": "milliliters" },
+        { "name": "Active dry yeast", "amount": 2, "unit": "teaspoons" },
+        { "name": "Sugar", "amount": 50, "unit": "grams" },
+        { "name": "Salt", "amount": 1, "unit": "teaspoon" },
+        { "name": "Unsalted butter", "amount": 250, "unit": "grams, cold" },
+        { "name": "Eggs", "amount": 2, "unit": "large" },
+        { "name": "Unsalted butter (for laminating)", "amount": 200, "unit": "grams" }
+      ],
+      "preparation": [
+        {
+          "name": "Activate yeast",
+          "description": "In a bowl, combine warm milk, sugar, and active dry yeast. Let it sit for 5-10 minutes until foamy."
+        },
+        {
+          "name": "Mix dough",
+          "description": "In a large mixing bowl, combine flour, salt, and cold unsalted butter (cubed). Add the yeast mixture and eggs. Mix until a dough forms."
+        },
+        {
+          "name": "Fold and refrigerate",
+          "description": "Roll out the dough, fold in layers with butter, and refrigerate for 1 hour. Repeat the folding process 2 more times, chilling between each fold."
+        },
+        {
+          "name": "Shape and proof",
+          "description": "Roll out the dough, cut into triangles, and roll each triangle into a croissant shape. Proof the croissants for 1-2 hours."
+        },
+        {
+          "name": "Bake",
+          "description": "Preheat the oven to 400°F (200°C). Bake the croissants for 15-20 minutes until golden brown."
+        },
+        {
+          "name": "Serve",
+          "description": "Serve the freshly baked croissants with your favorite jam or enjoy them plain."
+        }
+      ]
+    },
+    {
+      "name": "Sushi Rolls",
+      "cuisine": "Japanese",
+      "ingredients": [
+        { "name": "Sushi rice", "amount": 2, "unit": "cups, cooked" },
+        { "name": "Nori sheets", "amount": 5, "unit": "sheets" },
+        {
+          "name": "Fresh fish (salmon, tuna, etc.)",
+          "amount": 200,
+          "unit": "grams, thinly sliced"
+        },
+        { "name": "Cucumber", "amount": 1, "unit": "long, julienned" },
+        { "name": "Avocado", "amount": 1, "unit": "sliced" },
+        { "name": "Soy sauce", "amount": 1, "unit": "tablespoon" },
+        { "name": "Pickled ginger", "amount": 1, "unit": "tablespoon" },
+        { "name": "Wasabi", "amount": 1, "unit": "teaspoon" }
+      ],
+      "preparation": [
+        {
+          "name": "Prepare ingredients",
+          "description": "Cook sushi rice and let it cool. Slice fresh fish, julienned cucumber, and slice avocado."
+        },
+        {
+          "name": "Roll sushi",
+          "description": "Place a sheet of nori on a bamboo sushi rolling mat. Wet your hands and spread sushi rice over the nori. Add fish, cucumber, and avocado."
+        },
+        {
+          "name": "Roll and slice",
+          "description": "Roll the sushi tightly using the bamboo mat. Wet a sharp knife and slice the roll into bite-sized pieces."
+        },
+        {
+          "name": "Serve",
+          "description": "Serve sushi rolls with soy sauce, pickled ginger, and wasabi."
+        }
+      ]
+    },
+    {
+      "name": "Miso Soup",
+      "cuisine": "Japanese",
+      "ingredients": [
+        { "name": "Dashi (Japanese soup stock)", "amount": 4, "unit": "cups" },
+        { "name": "Miso paste", "amount": 3, "unit": "tablespoons" },
+        { "name": "Firm tofu", "amount": 200, "unit": "grams, cubed" },
+        { "name": "Green onions", "amount": 2, "unit": "chopped" },
+        { "name": "Wakame seaweed", "amount": 2, "unit": "tablespoons, dried" },
+        { "name": "Soy sauce", "amount": 1, "unit": "tablespoon" },
+        { "name": "Mirin", "amount": 1, "unit": "tablespoon" }
+      ],
+      "preparation": [
+        {
+          "name": "Rehydrate wakame",
+          "description": "Soak dried wakame seaweed in water for 5 minutes. Drain and set aside."
+        },
+        {
+          "name": "Make dashi",
+          "description": "In a pot, bring dashi to a simmer. Dissolve miso paste in a small amount of dashi and add it to the pot."
+        },
+        {
+          "name": "Add ingredients",
+          "description": "Add tofu, rehydrated wakame, chopped green onions, soy sauce, and mirin. Simmer for 5 minutes."
+        },
+        {
+          "name": "Serve",
+          "description": "Serve miso soup hot. Enjoy as an appetizer or side dish."
+        }
+      ]
+    },
+    {
+      "name": "Pad Thai",
+      "cuisine": "Thai",
+      "ingredients": [
+        { "name": "Rice noodles", "amount": 200, "unit": "grams" },
+        { "name": "Shrimp", "amount": 150, "unit": "grams, peeled and deveined" },
+        { "name": "Firm tofu", "amount": 150, "unit": "grams, cubed" },
+        { "name": "Bean sprouts", "amount": 1, "unit": "cup" },
+        { "name": "Green onions", "amount": 3, "unit": "chopped" },
+        { "name": "Peanuts", "amount": 1, "unit": "handful, crushed" },
+        { "name": "Eggs", "amount": 2, "unit": "beaten" },
+        { "name": "Lime", "amount": 1, "unit": "cut into wedges" },
+        { "name": "Vegetable oil", "amount": 2, "unit": "tablespoons" }
+      ],
+      "preparation": [
+        {
+          "name": "Soak noodles",
+          "description": "Soak rice noodles in warm water for 30 minutes. Drain and set aside."
+        },
+        {
+          "name": "Stir-fry tofu and shrimp",
+          "description": "In a wok, heat vegetable oil. Add cubed tofu and shrimp, stir-fry until cooked."
+        },
+        {
+          "name": "Cook eggs",
+          "description": "Push tofu and shrimp to one side of the wok. Pour beaten eggs into the empty side. Scramble and cook until set."
+        },
+        {
+          "name": "Add noodles and sauce",
+          "description": "Add soaked noodles and Pad Thai sauce to the wok. Toss everything together until well combined."
+        },
+        {
+          "name": "Serve",
+          "description": "Serve Pad Thai hot, garnished with bean sprouts, chopped green onions, crushed peanuts, and lime wedges."
+        }
+      ]
+    },
+    {
+      "name": "Green Curry Chicken",
+      "cuisine": "Thai",
+      "ingredients": [
+        { "name": "Chicken thighs", "amount": 500, "unit": "grams, boneless and skinless, sliced" },
+        { "name": "Green curry paste", "amount": 3, "unit": "tablespoons" },
+        { "name": "Coconut milk", "amount": 400, "unit": "milliliters" },
+        { "name": "Eggplant", "amount": 1, "unit": "small, diced" },
+        { "name": "Bell pepper", "amount": 1, "unit": "red, sliced" },
+        { "name": "Bamboo shoots", "amount": 1, "unit": "cup, sliced" },
+        { "name": "Fish sauce", "amount": 2, "unit": "tablespoons" },
+        { "name": "Brown sugar", "amount": 1, "unit": "tablespoon" },
+        { "name": "Thai basil leaves", "amount": 1, "unit": "cup" }
+      ],
+      "preparation": [
+        {
+          "name": "Cook chicken",
+          "description": "In a pan, cook sliced chicken until browned. Set aside."
+        },
+        {
+          "name": "Prepare curry",
+          "description": "In the same pan, simmer green curry paste in coconut milk. Add diced eggplant, sliced bell pepper, and bamboo shoots."
+        },
+        {
+          "name": "Season and simmer",
+          "description": "Season with fish sauce and brown sugar. Add cooked chicken and simmer until the vegetables are tender."
+        },
+        {
+          "name": "Add Thai basil",
+          "description": "Stir in Thai basil leaves just before serving."
+        },
+        { "name": "Serve", "description": "Serve green curry chicken over steamed jasmine rice." }
+      ]
+    }
+  ]
+}

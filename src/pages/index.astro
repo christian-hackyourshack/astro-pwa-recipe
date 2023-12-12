@@ -1,6 +1,8 @@
 ---
-import Layout from "../layouts/Layout.astro";
-import { getDadJoke } from "../utils/get-dad-joke";
+import Layout from "@/layouts/Layout.astro";
+import { getDadJoke } from "@/utils/get-dad-joke";
+
+export const prerender = false;
 
 const dadJoke = await getDadJoke();
 ---

@@ -1,0 +1,30 @@
+---
+import type { GetStaticPaths } from "astro";
+import Layout from "@/layouts/Layout.astro";
+import { cuisines } from "cuisines.json";
+
+export const getStaticPaths = (() => {
+  return cuisines.map((cuisine) => ({
+    params: { slug: cuisine.name.toLowerCase() },
+    props: { ...cuisine },
+  }));
+}) satisfies GetStaticPaths;
+
+const { name, image, description } = Astro.props;
+---
+
+<Layout>
+  <img src={image} alt={`Typical ${name} cuisine`} />
+  <h1>{name}</h1>
+  <p>{description}</p>
+</Layout>
+
+<style>
+  img {
+    height: 240px;
+    width: 100%;
+    object-fit: cover;
+    border-radius: 12px;
+    max-width: 100%;
+  }
+</style>
