@@ -1,0 +1,33 @@
+---
+layout: ../../layouts/JournalLayout.astro
+date: 2023-12-07
+summary: Simplified App
+---
+
+### Added local preview based on node adapter [14:30]
+
+Because I cannot get the development mode to work locally (for now) and from the docs it seems, that it is quite different from the production mode, I decided to use the node adapter for a local preview. I have installed it with `pnpm install @astrojs/node` and added the following switch to `astro.config.ts`:
+
+```ts
+const adapter =
+  process.env.ADAPTER === "node"
+    ? node({
+        mode: "standalone",
+      })
+    : vercel();
+```
+
+In `package.json` I have added the following script:
+
+```json
+    "preview": "ADAPTER=node astro build; ADAPTER=node astro preview"
+```
+
+### Offline support [14:45]
+
+I read up on Joaquín comments in Discord and it seems, that I need to spend some more thoughts into offline functionality:
+
+- SSG: Static pages seem fairly straight forward, they could be made dynamic with some islands, the islands should be aware of the offline state
+  - the disadvantage would be, that we might offload rendering to our users' (low-end) devices
+  - what would be the difference to a SPA, then? Wouldn't a SPA be better?
+- SSR: Server-rendered pages

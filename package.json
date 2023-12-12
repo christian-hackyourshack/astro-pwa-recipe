@@ -11,7 +11,7 @@
     "check": "astro check",
     "dev": "astro dev",
     "generate-pwa-assets": "pwa-assets-generator --preset minimal public/favicon.svg",
-    "preview": "astro preview"
+    "preview": "ADAPTER=node astro build; ADAPTER=node astro preview"
   },
   "dependencies": {
     "@astrojs/mdx": "^2.0.0",
