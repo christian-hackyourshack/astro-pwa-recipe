@@ -10,7 +10,12 @@ const dadJoke = await getDadJoke();
 <Layout>
   <h1>Vite-PWA & Astro Recipe</h1>
   <p>
-    Welcome to the unofficial <a href="/https://astro.build/">Astro</a> PWA recipe.
+    Welcome to the unofficial <a href="/https://astro.build/">Astro</a> PWA
+    recipe.
+  </p>
+  <p>
+    The basic app is rendered server-side with Astro's SSR mode, to demonstrate
+    the dynamic possibilities. So enjoy this dynamically embedded Dad joke
   </p>
   <blockquote>
     {dadJoke}
@@ -19,16 +24,16 @@ const dadJoke = await getDadJoke();
     </footer>
   </blockquote>
   <p>
-    <a href="/recipe">This recipe</a>
-     will show you, how to create an installable PWA with app features like offline support from
-    your Astro app.
+    This recipe will show you, <a href="/recipe/cpr5nc2adtfh"
+      >how to create the most basic installable PWA with offline support</a
+    > from your Astro app, using `generateSW` strategy.
   </p>
   <p>
-    The basic app is rendered server-side with Astro's SSR mode, to demonstrate the dynamic
-    possibilities. So enjoy this dynamically embedded Dad joke
+    Find more recipes in our <a href="/catalog">catalog</a>.
   </p>
+
   <p>
-    If you are interested in my journey of implementing this prototype to develop the recipe, I
-    wrote a <a href="/journal">journal</a> about it.
+    If you are interested in my journey of implementing this prototype to
+    develop the recipe, I wrote a <a href="/journal">journal</a> about it.
   </p>
 </Layout>

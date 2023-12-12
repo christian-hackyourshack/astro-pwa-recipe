@@ -31,12 +31,33 @@ devDependencies:
   '@vite-pwa/astro':
     specifier: ^0.2.0
     version: 0.2.0(astro@4.0.2)(vite-plugin-pwa@0.17.3)
+  nanoid:
+    specifier: ^5.0.4
+    version: 5.0.4
   typescript:
     specifier: ^5.3.2
     version: 5.3.2
   vite-plugin-pwa:
     specifier: ^0.17.3
     version: 0.17.3(vite@5.0.5)(workbox-build@7.0.0)(workbox-window@7.0.0)
+  workbox-core:
+    specifier: ^7.0.0
+    version: 7.0.0
+  workbox-expiration:
+    specifier: ^7.0.0
+    version: 7.0.0
+  workbox-precaching:
+    specifier: ^7.0.0
+    version: 7.0.0
+  workbox-recipes:
+    specifier: ^7.0.0
+    version: 7.0.0
+  workbox-routing:
+    specifier: ^7.0.0
+    version: 7.0.0
+  workbox-strategies:
+    specifier: ^7.0.0
+    version: 7.0.0
   workbox-window:
     specifier: ^7.0.0
     version: 7.0.0
@@ -4514,6 +4535,12 @@ packages:
     resolution: {integrity: sha512-eSRppjcPIatRIMC1U6UngP8XFcz8MQWGQdt1MTBQ7NaAmvXDfvNxbvWV3x2y6CdEUciCSsDHDQZbhYaB8QEo2g==}
     engines: {node: ^10 || ^12 || ^13.7 || ^14 || >=15.0.1}
     hasBin: true
+
+  /nanoid@5.0.4:
+    resolution: {integrity: sha512-vAjmBf13gsmhXSgBrtIclinISzFFy22WwCYoyilZlsrRXNIHSwgFQ1bEdjRwMT3aoadeIF6HMuDRlOxzfXV8ig==}
+    engines: {node: ^18 || >=20}
+    hasBin: true
+    dev: true
 
   /napi-build-utils@1.0.2:
     resolution: {integrity: sha512-ONmRUqK7zj7DWX0D9ADe03wbwOBZxNAfF20PlGfCWQcD3+/MakShIHrMqx9YwPTfxDdF1zLeL+RGZiR9kGMLdg==}

@@ -5,6 +5,7 @@
   "short_name": "Astro PWA",
   "description": "Example PWA for Astro using Vite-PWA",
   "orientation": "portrait",
+  "lang": "en",
   "display": "standalone",
   "theme_color": "#ff5d01",
   "background_color": "#11191f",

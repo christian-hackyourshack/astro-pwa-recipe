@@ -11,7 +11,10 @@
     "check": "astro check",
     "dev": "astro dev",
     "generate-pwa-assets": "pwa-assets-generator --preset minimal public/favicon.svg",
-    "preview": "ADAPTER=node astro build; ADAPTER=node astro preview"
+    "nanoid": "nanoid --alphabet 0123456789abcdefghijklmnopqrstuvwxyz --size 12",
+    "preview:build": "ADAPTER=node astro build",
+    "preview:only": "ADAPTER=node astro preview",
+    "preview": "pnpm preview:build && pnpm preview:only"
   },
   "dependencies": {
     "@astrojs/mdx": "^2.0.0",
@@ -24,8 +27,15 @@
     "@astrojs/check": "^0.3.1",
     "@vite-pwa/assets-generator": "^0.0.11",
     "@vite-pwa/astro": "^0.2.0",
+    "nanoid": "^5.0.4",
     "typescript": "^5.3.2",
     "vite-plugin-pwa": "^0.17.3",
+    "workbox-core": "^7.0.0",
+    "workbox-expiration": "^7.0.0",
+    "workbox-precaching": "^7.0.0",
+    "workbox-recipes": "^7.0.0",
+    "workbox-routing": "^7.0.0",
+    "workbox-strategies": "^7.0.0",
     "workbox-window": "^7.0.0"
   }
 }

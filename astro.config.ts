@@ -3,8 +3,8 @@ import node from "@astrojs/node";
 import vercel from "@astrojs/vercel/serverless";
 import AstroPWA from "@vite-pwa/astro";
 import { defineConfig } from "astro/config";
+import manifest from "./src/pwa/webmanifest.json";
 import type { ManifestOptions } from "vite-plugin-pwa";
-import manifest from "./webmanifest.json";
 
 const adapter =
   process.env.ADAPTER === "node"
@@ -22,14 +22,23 @@ export default defineConfig({
   integrations: [
     mdx(),
     AstroPWA({
+      strategies: "injectManifest",
+      srcDir: "src/pwa",
+      filename: "sw.ts",
+      injectManifest: {
+        globPatterns: [
+          "_astro/*.{css,js}",
+          "journal/**/index.html",
+          "pwa-192x192.png",
+          "**/offline/index.html",
+        ],
+      },
+      injectRegister: false,
       manifest: manifest as Partial<ManifestOptions>,
       mode: "production",
-      registerType: "autoUpdate",
+      scope: "/",
       includeAssets: ["favicon.svg"],
-      workbox: {
-        navigateFallback: "/default.offline",
-        globPatterns: ["**/*.{css,js,html,svg,png,ico,txt}"],
-      },
+      registerType: "autoUpdate",
       experimental: {
         directoryAndTrailingSlashHandler: true,
       },

@@ -1,8 +1,9 @@
 ---
 import Nav from "@/components/Nav.astro";
+import RegisterSW from "@/pwa/RegisterSW.astro";
+import WebManifestLink from "@/pwa/WebManifestLink.astro";
 import "@picocss/pico";
 import packageJson from "package.json";
-import { pwaInfo } from "virtual:pwa-info";
 
 interface Props {
   title?: string;
@@ -31,44 +32,32 @@ const { description = packageJson.description } = Astro.props;
     <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
     <link rel="mask-icon" href="/favicon.svg" color="#FFFFFF" />
     <link rel="apple-touch-icon" href="/pwa-192x192.png" />
-    {pwaInfo && <Fragment set:html={pwaInfo.webManifest.linkTag} />}
-    <script>
-      import { registerSW } from "virtual:pwa-register";
-      registerSW({
-        immediate: true,
-        onRegisteredSW(swScriptUrl) {
-          console.log("SW registered: ", swScriptUrl);
-        },
-        onOfflineReady() {
-          console.log("PWA application ready to work offline");
-        },
-      });
-    </script>
+    <WebManifestLink />
   </head>
   <body>
     <Nav />
     <main class="container">
       <slot />
     </main>
+    <style is:global>
+      .sr-only {
+        border: 0;
+        padding: 0;
+        margin: 0;
+        position: absolute !important;
+        height: 1px;
+        width: 1px;
+        overflow: hidden;
+        /* IE6, IE7 - a 0 height clip, off to the bottom right of the visible 1px box */
+        clip: rect(1px 1px 1px 1px);
+        /* maybe deprecated but we need to support legacy browsers */
+        clip: rect(1px, 1px, 1px, 1px);
+        /* modern browsers, clip-path works inwards from each corner */
+        clip-path: inset(50%);
+        /* added line to stop words getting smushed together (as they go onto seperate lines and some screen readers do not understand line feeds as a space */
+        white-space: nowrap;
+      }
+    </style>
+    <RegisterSW />
   </body>
 </html>
-
-<style is:global>
-  .sr-only {
-    border: 0;
-    padding: 0;
-    margin: 0;
-    position: absolute !important;
-    height: 1px;
-    width: 1px;
-    overflow: hidden;
-    /* IE6, IE7 - a 0 height clip, off to the bottom right of the visible 1px box */
-    clip: rect(1px 1px 1px 1px);
-    /* maybe deprecated but we need to support legacy browsers */
-    clip: rect(1px, 1px, 1px, 1px);
-    /* modern browsers, clip-path works inwards from each corner */
-    clip-path: inset(50%);
-    /* added line to stop words getting smushed together (as they go onto seperate lines and some screen readers do not understand line feeds as a space */
-    white-space: nowrap;
-  }
-</style>

@@ -1,16 +1,20 @@
 ---
 import Layout from "@/layouts/Layout.astro";
-import { cuisines } from "cuisines.json";
-import { recipes } from "recipes.json";
+import { categories } from "categories.json";
+import { getCollection } from "astro:content";
 
 export const prerender = false;
-
-const randomId = Math.floor(Math.random() * recipes.length);
+const recipes = await getCollection("recipes");
+const randomRecipe = recipes[Math.floor(Math.random() * recipes.length)];
 ---
 
 <Layout>
-  <h1>Recipes</h1>
-  <p>Our best recipe is still the one <a href="/recipe">how to cook a PWA</a>.</p>
+  <h1>Catalog</h1>
+  <p>
+    Our simplest recipe is still the one <a href="/recipe/cpr5nc2adtfh"
+      >how to cook a PWA with `generateSW` strategy</a
+    >.
+  </p>
   <form>
     <label for="search"
       >Search
@@ -18,14 +22,16 @@ const randomId = Math.floor(Math.random() * recipes.length);
       <button type="submit">Search</button>
     </label>
   </form>
-  <h2>Cook this Today</h2>
-  <a href={`/recipes/${randomId}`}>{recipes[randomId].name}</a>
-  <h2>Cuisines</h2>
+  <h2>Try this recipe today</h2>
+  <a href={`/recipe/${randomRecipe.slug}`}>{randomRecipe.data.title}</a>
+  <h2>Categories</h2>
   <ul>
     {
-      cuisines.map((cuisine) => (
+      categories.map((category) => (
         <li>
-          <a href={`/cuisines/${cuisine.name.toLowerCase()}`}>{cuisine.name}</a>
+          <a href={`/category/${category.name.toLowerCase()}`}>
+            {category.name}
+          </a>
         </li>
       ))
     }

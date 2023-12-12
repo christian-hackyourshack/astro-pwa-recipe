@@ -1,0 +1,42 @@
+---
+layout: ../../layouts/JournalLayout.astro
+date: 2023-12-12
+summary: Made app more real life to test offline-first
+---
+
+### Offline-first
+
+I switched the output mode to `hybrid`, so that I can easily define static pages with offline functionality. It still allows me to use SSR for dynamic pages with
+
+```ts
+export const prerender = false;
+```
+
+I created some routes based on the idea of a recipe app to demonstrate different offline scenarios.
+
+```plaintext
+    Route                  ║ Output                 ║ PC ║ PW
+═══════════════════════════╬════════════════════════╬════╬═════
+├── catalog                ║                        ║    ║
+│   ├── index.astro        ║ SSR                    ║    ║
+│   └── offline.astro      ║ /catalog/offline.html  ║ x  ║
+├── category               ║                        ║    ║
+│   ├── [slug].astro       ║ e.g. /category/french  ║    ║
+│   └── offline.astro      ║ /category/offline.html ║ x  ║
+├── journal                ║                        ║    ║
+│   ├── index.astro        ║ /journal/index.html    ║ x  ║
+│   └── ...                ║                        ║    ║
+├── recipe                 ║                        ║    ║
+│   ├── [id].astro         ║ SSR                    ║    ║
+│   └── offline.astro      ║ /recipe/offline.html   ║ x  ║
+├── 404.astro              ║ /404.html              ║ x  ║
+├── index.astro            ║ SSR                    ║    ║
+└── offline.astro          ║ /offline.html          ║ x  ║
+
+PC: Precache
+PW: Prewarmed (dynamic) cache (later)
+```
+
+From my understanding of offline-first experience, I realized, that SSR pages will need an offline page. I would like to have different offline fallbacks for different SSR URLs. I created pages for the above structure.
+
+This is probably not supported by Vite-PWA with `generateSW` strategy, but can hopefully be implemented when using `injectManifest` strategy with my own service worker implementation.
