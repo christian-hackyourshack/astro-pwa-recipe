@@ -19,6 +19,10 @@ export default defineConfig({
   base: "/",
   output: "hybrid",
   adapter,
+  build: {
+    format: "file",
+  },
+  trailingSlash: "ignore",
   integrations: [
     mdx(),
     AstroPWA({
@@ -28,9 +32,10 @@ export default defineConfig({
       injectManifest: {
         globPatterns: [
           "_astro/*.{css,js}",
-          "journal/**/index.html",
+          "**/offline.html",
+          "journal.html",
+          "journal/*.html",
           "pwa-192x192.png",
-          "**/offline/index.html",
         ],
       },
       injectRegister: false,
