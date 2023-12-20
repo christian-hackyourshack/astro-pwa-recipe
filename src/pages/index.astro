@@ -1,4 +1,7 @@
 ---
+import Hero from "@/components/Hero.astro";
+import Credits from "@/images/cookbook.credits.astro";
+import cookbook from "@/images/cookbook.jpg";
 import Layout from "@/layouts/Layout.astro";
 import { getDadJoke } from "@/utils/get-dad-joke";
 
@@ -8,14 +11,28 @@ const dadJoke = await getDadJoke();
 ---
 
 <Layout>
-  <h1>Vite-PWA & Astro Recipe</h1>
+  <Hero image={cookbook} alt="Bookshelve with cookbook"><Credits /></Hero>
+  <h1>Astro PWA Cookbook</h1>
+  <p>Welcome to the unofficial Astro PWA cookbook.</p>
   <p>
-    Welcome to the unofficial <a href="/https://astro.build/">Astro</a> PWA
-    recipe.
+    <a href="/cookbook">These recipes</a> will show you, how to create a
+    <a href="https://web.dev/articles/what-are-pwas">Progressive Web App</a>
+     with <a href="/https://astro.build/">Astro</a> and <a
+      href="https://vite-pwa-org.netlify.app/">Vite-PWA</a
+    >, including offline support (even for SSR pages), push notifications and
+    more.
   </p>
   <p>
-    The basic app is rendered server-side with Astro's SSR mode, to demonstrate
-    the dynamic possibilities. So enjoy this dynamically embedded Dad joke
+    <a href="/recipe/generate-sw">Get started</a>
+     with the most basic installable PWA with offline support, that simply
+    caches all static pages, using <code>generateSW</code> strategy.
+  </p>
+  <p>
+    This website is a PWA, to demonstrate the fantastic possibilities that you
+    have when creating your PWA with Astro. It is a hybrid app, with some static
+    pages and some rendered server-side. Nevertheless, most of it's
+    functionality is also available offline. So enjoy this Dad joke, that will
+    be updated server-side on every page reload (while you are online):
   </p>
   <blockquote>
     {dadJoke}
@@ -23,15 +40,6 @@ const dadJoke = await getDadJoke();
       <cite>Dad</cite>
     </footer>
   </blockquote>
-  <p>
-    This recipe will show you, <a href="/recipe/cpr5nc2adtfh"
-      >how to create the most basic installable PWA with offline support</a
-    > from your Astro app, using `generateSW` strategy.
-  </p>
-  <p>
-    Find more recipes in our <a href="/catalog">catalog</a>.
-  </p>
-
   <p>
     If you are interested in my journey of implementing this prototype to
     develop the recipe, I wrote a <a href="/journal">journal</a> about it.

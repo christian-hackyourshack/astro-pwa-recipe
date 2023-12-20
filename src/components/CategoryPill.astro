@@ -1,0 +1,53 @@
+---
+import type { Category } from "@/content/config";
+import { getCollection } from "astro:content";
+
+interface C {
+  slug: string;
+  data: {
+    name: string;
+    color: string;
+  };
+}
+
+interface Props {
+  category: Category | string;
+  noLink?: boolean;
+}
+
+const { category: _category, noLink } = Astro.props;
+
+let category: C;
+if (typeof _category === "string") {
+  category = (await getCollection("categories")).find(
+    (c) => c.data.name === _category
+  ) || { data: { name: _category, color: "black" }, slug: "" };
+} else {
+  category = _category;
+}
+
+const style = `background-color: ${category.data.color};`;
+---
+
+{
+  noLink ? (
+    <div style={style}>{category.data.name}</div>
+  ) : (
+    <a href={`/category/${category.slug}`} style={style}>
+      {category.data.name}
+    </a>
+  )
+}
+
+<style>
+  a,
+  div {
+    display: block;
+    border-radius: 99px;
+    margin: 0;
+    padding: 2px 16px;
+    width: fit-content;
+    text-decoration: none;
+    color: white;
+  }
+</style>

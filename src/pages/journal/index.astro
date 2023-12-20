@@ -1,12 +1,23 @@
 ---
 import Layout from "@/layouts/Layout.astro";
 import { localeDate } from "@/utils/locale-date";
+import { Image } from "astro:assets";
+import journal from "@/images/journal.jpg";
+import Credits from "@/images/journal.credits.astro";
+import Hero from "@/components/Hero.astro";
+
 const posts = await Astro.glob("./*.mdx");
 ---
 
 <Layout>
+  <Hero image={journal} alt="Person writing into journal"><Credits /></Hero>
   <h1>Journal</h1>
-  <p>My learning journey creating a Progressive Web App with Astro...</p>
+  <p>
+    <em
+      >On the way to creating a Progressive Web App with Astro: My learning
+      journey.</em
+    >
+  </p>
 
   <ul>
     {
@@ -20,3 +31,15 @@ const posts = await Astro.glob("./*.mdx");
     }
   </ul>
 </Layout>
+
+<style>
+  .hero-overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    bottom: 0;
+    right: 0;
+    background: linear-gradient(#0000, #0000, #000f);
+    border-radius: 14px;
+  }
+</style>

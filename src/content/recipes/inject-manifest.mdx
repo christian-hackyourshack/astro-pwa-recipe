@@ -1,0 +1,212 @@
+---
+title: PWA with `injectManifest`
+description: Create a simple PWA and provide your own service worker to gain more control over the behavior.
+categories: [Setup]
+---
+
+# PWA with `injectManifest`
+
+A PWA is just any web app that provides a webmanifest and a service worker (for offline support).
+
+[Vite-PWA](https://vite-pwa-org.netlify.app/) is an open-source PWA integration for Vite, that offers functionality to generate and link to the webmanifest and to generate and register the service worker. It provides an [integration for Astro](https://vite-pwa-org.netlify.app/frameworks/astro.html) that understands the Astro project structure and can incorporate it into the manifest(s).
+
+## Step-by-step
+
+### Install Vite-PWA
+
+Install the Vite-PWA Astro integration as development dependency
+
+```bash
+pnpm add -D @vite-pwa/astro workbox-window
+```
+
+> ❓ For the rollup build, we also explicitly need to install `workbox-window` (this might be a pnpm thing, where the internal dependencies of vite-plugin-pwa are not configured correctly).
+
+### Generate assets (optional)
+
+If you have all required PNG and ICO assets for your branding, you can skip this step.
+
+Vite-PWA provides an asset generator, that takes your favicon.svg and generates all required formats to be included in your webmanifest.
+
+Install the asset generator
+
+```bash
+pnpm add -D @vite-pwa/assets-generator
+```
+
+Add the following line to the `scripts` section of `package.json`
+
+```json
+    "generate-pwa-assets": "pwa-assets-generator --preset minimal public/favicon.svg",
+```
+
+Run the asset generator
+
+```bash
+pnpm generate-pwa-assets
+```
+
+The generated artifacts should either be added to your repository or you need to integrate the asset generation in your build process.
+
+### Create custom part of webmanifest
+
+Create a JSON file `webmanifest.json` at the root of your project with the following content
+
+```json
+{
+  "$schema": "https://json.schemastore.org/web-manifest-combined.json",
+  "id": "astro-pwa-recipe",
+  "name": "Astro PWA | The recipe",
+  "short_name": "Astro PWA",
+  "description": "Example PWA for Astro using Vite-PWA",
+  "orientation": "portrait",
+  "display": "standalone",
+  "theme_color": "#ff5d01",
+  "background_color": "#11191f",
+  "icons": [
+    {
+      "src": "pwa-64x64.png",
+      "sizes": "64x64",
+      "type": "image/png"
+    },
+    {
+      "src": "pwa-192x192.png",
+      "sizes": "192x192",
+      "type": "image/png"
+    },
+    {
+      "src": "pwa-512x512.png",
+      "sizes": "512x512",
+      "type": "image/png",
+      "purpose": "any"
+    },
+    {
+      "src": "maskable-icon-512x512.png",
+      "sizes": "512x512",
+      "type": "image/png",
+      "purpose": "maskable"
+    }
+  ]
+}
+```
+
+This is used as the basis for the generated webmanifest. Adapt the settings, e.g. the colors, to your app.
+
+### Configure the Astro integration
+
+Update `astro.config.mjs` to include the AstroPWA integration
+
+```js
+import { defineConfig } from "astro/config";
+import AstroPWA from "@vite-pwa/astro";
+import type { ManifestOptions } from "vite-plugin-pwa";
+import manifest from "./webmanifest.json";
+
+// https://astro.build/config
+export default defineConfig({
+  integrations: [
+    AstroPWA({
+      mode: "production",
+      registerType: "autoUpdate",
+      includeAssets: ["favicon.svg"],
+      workbox: {
+        navigateFallback: "/",
+        globPatterns: ["**/*.{css,js,html,svg,png,ico,txt}"],
+      },
+      experimental: {
+        directoryAndTrailingSlashHandler: true,
+      },
+      manifest: manifest as Partial<ManifestOptions>,
+    }),
+  ],
+});
+```
+
+This is the most simple configuration for Vite-PWA for production mode with automatic updates. It includes the favicon.svg in the precached assets.
+
+### Register the service worker
+
+Add a script to your base layout (or all layouts if you don't use a central layout), that registers the service worker on every page of the app.
+
+```astro
+  <script>
+    import { registerSW } from "virtual:pwa-register";
+
+    registerSW({
+      immediate: true,
+      onRegisteredSW(swScriptUrl) {
+        console.log("SW registered: ", swScriptUrl);
+      },
+      onOfflineReady() {
+        console.log("PWA application ready to work offline");
+      },
+    });
+  </script>
+```
+
+This uses a Vite-PWA virtual module. To make this available to Typescript you must add two triple-slash type references to `src/env.d.ts`
+
+```ts
+/// <reference types="vite-plugin-pwa/info" />
+/// <reference types="vite-plugin-pwa/vanillajs" />
+```
+
+> ❓ At least for pnpm, you must exlicitly install `vite-plugin-pwa` to resolve the type references.
+>
+> ```bash
+> pnpm add -D vite-plugin-pwa
+> ```
+>
+> You might need to restart your IDE for Astro Language Support to pick this up.
+
+### Link the webmanifest
+
+In the same layout, above the `<script>` tag, link the webmanifest. Use the virtual module `pwa-info` to generate the correct link.
+
+```astro
+---
+import { pwaInfo } from "virtual:pwa-info";
+---
+  <head>
+  ...
+    {pwaInfo && <Fragment set:html={pwaInfo.webManifest.linkTag} />}
+    <script>
+    ...
+```
+
+This finishes the setup of a basic installable PWA without using any of the specific PWA features. You can now deploy it and install it to your home screen, either by "Add to home screen..." or "Install app...", depending on your browser.
+
+### Offline support (pre-caching and caching)
+
+To include all resource types of your app, you must configure the workbox `globPatterns`, because by default, they include only html, css and js.
+
+Add the following to the AstroPWA configuration
+
+```ts
+      workbox: {
+        globPatterns: ["**/*.{js,css,html,ico,png,svg}"],
+      },
+```
+
+This now also includes graphic assets from your app, add more as you need.
+
+For an SSR app, the assets are picked up from the `dist/client` directory.
+
+## Upcoming Features
+
+### Custom 404 page
+
+### Push notifications
+
+### Development mode
+
+## Community Resources
+
+- Shaun Chander's [Astro PWA Starter](https://github.com/shaunchander/astro-pwa-starter/tree/master), uses a slightly outdated version of the Vite-PWA Plugin, that does not have the Astro integration yet
+
+## Production Sites
+
+The following sites use Vite-PWA + Astro in production:
+
+- [yunielacosta.com](https://www.yunielacosta.com/) by Yuniel Acosta — [source code on GitHub](https://github.com/yacosta738/yacosta738.github.io) (Netlify CMS)
+- The [Elk Mastodon App](https://docs.elk.zone/pwa) usesVite-PWA with Vue and not Astro, but it demonstrates a lot of the PWA features incorporated into Vite-PWA (and workbox).

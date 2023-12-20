@@ -18,7 +18,7 @@ cleanupOutdatedCaches();
 // these assets will be served cache-first (see https://developer.chrome.com/docs/workbox/modules/workbox-precaching#how_workbox-precaching_works for details)
 precacheAndRoute(self.__WB_MANIFEST);
 
-pageCache({ warmCache: ["/", "/catalog/"] });
+pageCache({ warmCache: ["/", "/cookbook/"] });
 staticResourceCache();
 imageCache();
 

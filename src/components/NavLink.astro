@@ -10,7 +10,8 @@ let { pathname } = Astro.url;
 // Remove trailing slash
 pathname = pathname.replace(/\/$/, "") || "/";
 
-const isActive = pathname === href || (href !== "/" && pathname.startsWith(href));
+const isActive =
+  pathname === href || (href !== "/" && pathname.startsWith(href));
 ---
 
 <a href={href} class:list={[className, { active: isActive }]} {...props}>

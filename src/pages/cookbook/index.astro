@@ -1,0 +1,88 @@
+---
+import CategoryPill from "@/components/CategoryPill.astro";
+import Hero from "@/components/Hero.astro";
+import RecipeCard from "@/components/RecipeCard.astro";
+import Credits from "@/images/recipe.credits.astro";
+import recipe from "@/images/recipe.jpg";
+import Layout from "@/layouts/Layout.astro";
+import { getCollection } from "astro:content";
+
+export const prerender = false;
+
+const categories = await getCollection("categories");
+const recipes = await getCollection("recipes");
+const randomRecipe = recipes.filter((r) => r.slug !== "generate-sw")[
+  Math.floor(Math.random() * (recipes.length - 1))
+];
+---
+
+<Layout>
+  <Hero image={recipe} alt="Book page with recipe"><Credits /></Hero>
+  <h1>Cookbook</h1>
+  <p>
+    If you do not have a PWA yet, you can start with our <a
+      href="/recipe/generate-sw">simplest recipe</a
+    > and cook a quick PWA with the <code>generateSW</code> strategy.
+  </p>
+  <p>But maybe you feel adventurous and want to try a random recipe</p>
+  <RecipeCard recipe={randomRecipe} />
+  <section>
+    <h2>All Recipes</h2>
+    <p>
+      You can also browse recipes by category
+      <ul class="categories">
+        {
+          categories.map((category) => (
+            <li>
+              <CategoryPill category={category} />
+            </li>
+          ))
+        }
+      </ul>
+    </p>
+    <ul class="recipes">
+      {
+        recipes.map((recipe) => (
+          <li>
+            <RecipeCard recipe={recipe} />
+          </li>
+        ))
+      }
+    </ul>
+  </section>
+</Layout>
+
+<style>
+  section {
+    margin-top: 32px;
+  }
+  ul.categories {
+    display: inline-flex;
+    flex-wrap: wrap;
+    margin: 0;
+    padding: 0;
+    gap: 8px;
+    li {
+      list-style: none;
+    }
+  }
+  .category {
+    width: fit-content;
+    background: oklch(30% 0.05 50);
+    text-decoration: none;
+    border-radius: 99px;
+    color: white;
+    padding: 2px 12px;
+  }
+
+  ul.recipes {
+    margin: 0;
+    padding: 0;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 16px;
+    li {
+      list-style: none;
+    }
+  }
+</style>

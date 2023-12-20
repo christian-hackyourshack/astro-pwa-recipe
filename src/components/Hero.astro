@@ -1,0 +1,57 @@
+---
+import { Image } from "astro:assets";
+
+interface Props {
+  image: ImageMetadata;
+  alt: string;
+}
+
+const { image, alt }: Props = Astro.props;
+---
+
+<figure>
+  <Image src={image} alt={alt} class="hero" />
+  <div class="overlay"></div>
+  <figcaption>
+    <small>
+      <slot />
+    </small>
+  </figcaption>
+</figure>
+
+<style>
+  figure {
+    border-radius: 16px;
+    display: flex;
+    flex-direction: column;
+    margin: 0;
+    position: relative;
+  }
+
+  img {
+    height: 280px;
+    width: 100%;
+    object-fit: cover;
+  }
+
+  .overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    bottom: 0;
+    right: 0;
+    background: linear-gradient(#0000, #0000, #000f);
+  }
+
+  figcaption {
+    position: absolute;
+    bottom: 0;
+    width: 100%;
+    text-align: center;
+    color: #fff8;
+    a {
+      color: #fff8;
+      text-decoration: none;
+    }
+  }
+</style>

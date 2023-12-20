@@ -5,8 +5,19 @@ const recipes = defineCollection({
   schema: z.object({
     title: z.string(),
     description: z.string(),
+    categories: z.array(z.string()).optional(),
   }),
 });
-export const collections = { recipes };
-
 export type Recipe = CollectionEntry<"recipes">;
+
+const categories = defineCollection({
+  type: "content",
+  schema: z.object({
+    name: z.string(),
+    description: z.string(),
+    color: z.string(),
+  }),
+});
+export type Category = CollectionEntry<"categories">;
+
+export const collections = { recipes, categories };

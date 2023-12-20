@@ -1,0 +1,33 @@
+---
+title: Generate PWA Assets
+description: Use a simple Vite-PWA script to generate all your assets.
+categories: [Setup]
+---
+
+# Generate Assets
+
+Vite-PWA provides an asset generator, that takes your favicon.svg and generates all required formats to be included in your webmanifest.
+
+## Step-by-step
+
+### Install the asset generator
+
+```bash
+pnpm add -D @vite-pwa/assets-generator
+```
+
+### Add a script to package.json
+
+Add the following line to the `scripts` section of `package.json`
+
+```json
+    "generate-pwa-assets": "pwa-assets-generator --preset minimal public/favicon.svg",
+```
+
+### Run the asset generator
+
+```bash
+pnpm generate-pwa-assets
+```
+
+The generated artifacts should either be added to your repository or you need to integrate the asset generation in your build process.

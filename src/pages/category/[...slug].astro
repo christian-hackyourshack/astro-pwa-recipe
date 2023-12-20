@@ -1,22 +1,23 @@
 ---
 import type { GetStaticPaths } from "astro";
 import Layout from "@/layouts/Layout.astro";
-import { categories } from "categories.json";
+import { getCollection } from "astro:content";
 
-export const getStaticPaths = (() => {
+export const getStaticPaths = (async () => {
+  const categories = await getCollection("categories");
   return categories.map((category) => ({
-    params: { slug: category.name.toLowerCase() },
+    params: { slug: category.slug },
     props: { ...category },
   }));
 }) satisfies GetStaticPaths;
 
-const { name, image, description } = Astro.props;
+const { render } = Astro.props;
+const { Content } = await render();
 ---
 
 <Layout>
-  <img src={image} alt={`Typical ${name} category`} />
-  <h1>{name}</h1>
-  <p>{description}</p>
+  <Content />
+  <h2>Recipes</h2>
 </Layout>
 
 <style>
