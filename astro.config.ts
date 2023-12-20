@@ -11,7 +11,13 @@ const adapter =
     ? node({
         mode: "standalone",
       })
-    : vercel();
+    : vercel({
+        imageService: true,
+        imagesConfig: {
+          domains: [],
+          sizes: [320, 640, 1280],
+        },
+      });
 
 // https://astro.build/config
 export default defineConfig({
