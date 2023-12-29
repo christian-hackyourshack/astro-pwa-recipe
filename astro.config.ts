@@ -5,7 +5,7 @@ import AstroPWA from "@vite-pwa/astro";
 import { defineConfig } from "astro/config";
 import manifest from "./src/pwa/webmanifest.json";
 import type { ManifestOptions } from "vite-plugin-pwa";
-
+import solidJs from "@astrojs/solid-js";
 const adapter =
   process.env.ADAPTER === "node"
     ? node({
@@ -27,6 +27,7 @@ export default defineConfig({
   adapter,
   integrations: [
     mdx(),
+    solidJs(),
     AstroPWA({
       strategies: "injectManifest",
       srcDir: "src/pwa",
